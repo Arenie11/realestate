@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*2nuq*#j%vpwuf--jjw@dh%b4%gkd+%c2=j*o#(63%g%tf-wfd'
+SECRET_KEY = str( os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'realestate.apps.RealestateConfig',
     'user.apps.UserConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -118,8 +122,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+#image settings
+MEDIA_URL = '/image/'
+MEDIA_ROOT = os.path.join (BASE_DIR, 'image')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smpt.gmail.com'  # SMTP server host
+EMAIL_PORT = 587  # SMTP server port (587 for TLS, 465 for SSL)
+EMAIL_USE_TLS = True  # True for TLS, False for SSL
+EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))  # SMTP server username
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))   # SMTP server password
+
