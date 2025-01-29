@@ -40,7 +40,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             fullname= validated_data['fullname'],
             phone = validated_data['phone'],
             gender = validated_data['gender'],
-            profile_pix= validated_data.get('profile_pix')
+             profile_pix= validated_data.get('profile_pix')
         )
         SendMail(email)
         return profile

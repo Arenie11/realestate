@@ -132,9 +132,13 @@ MEDIA_ROOT = os.path.join (BASE_DIR, 'image')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smpt.gmail.com'  # SMTP server host
+EMAIL_HOST = 'smtp.gmail.com'  # SMTP server host
 EMAIL_PORT = 587  # SMTP server port (587 for TLS, 465 for SSL)
 EMAIL_USE_TLS = True  # True for TLS, False for SSL
 EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))  # SMTP server username
 EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))   # SMTP server password
 
+#paystack
+PAYSTACK_SECRET_KEY = str(os.getenv('PAYSTACK_SECRET_KEY')) 
+PAYSTACK_PUBLIC_KEY = str(os.getenv('PAYSTACK_PUBLIC_KEY')) 
+PAYSTACK_BASE_URL = 'https://api.paystack.co'
