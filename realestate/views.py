@@ -19,9 +19,9 @@ class ListingView(APIView):
 
 #get single
 class GetListingView(APIView):
-    def get(self,request, pk):
+    def get(self,request,):
         try:
-            listing = get_object_or_404(Listing, pk=pk, published=True, is_available=True)
+            listing = get_object_or_404(Listing, published=True, is_available=True)
             serializer = ListingSerializer(listing)
             return Response (serializer.data, status=status.HTTP_200_OK)
         except Exception as e:

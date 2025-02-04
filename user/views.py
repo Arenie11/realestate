@@ -10,6 +10,7 @@ from rest_framework.decorators import permission_classes
 from . serializers import UserSerializer, UpdateProfileSerializer, RegistrationSerializer
 from . models import Profile
 from django.contrib.auth.models import User
+from django.middleware.csrf import get_token
 
 from django.contrib.auth import authenticate, login,logout
 #registration
@@ -78,15 +79,28 @@ class LoginView(APIView):
             return Response({'error': str(e)}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 #logout
+# class LogoutView(APIView):
+#     def post(self, request):
+#         try:
+#             logout(request)
+#             return Response({"Message": "user login successfully!"}, status= status.HTTP_200_OK)        
+            
+#         except Exception as e:
+#             return Response({'error': str(e)}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
 class LogoutView(APIView):
     def post(self, request):
         try:
             logout(request)
-            return Response({"Message": "user login successfully!"}, status= status.HTTP_200_OK)        
-            
+            return Response({"Message": "User logged out successfully!"}, status=status.HTTP_200_OK)
         except Exception as e:
-            return Response({'error': str(e)}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def get_csrf_token(self, request):
+        return get_token(request)
+
 #dashboard
 class DashboardView(APIView):
     def get (self, request):
