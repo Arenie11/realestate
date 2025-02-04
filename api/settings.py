@@ -29,7 +29,7 @@ SECRET_KEY = str( os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['http://realestate-yqmi.onrender.com','https://realestate-yqmi.onrender.com' ,'localhost:8000', '127.0.0.1']
+ALLOWED_HOSTS = ['realestate-yqmi.onrender.com','https://realestate-yqmi.onrender.com' ,'localhost:8000', '127.0.0.1']
 
 
 # Application definition
@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'realestate.apps.RealestateConfig',
     'user.apps.UserConfig',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -157,3 +159,11 @@ EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))   # SMTP server pass
 PAYSTACK_SECRET_KEY = str(os.getenv('PAYSTACK_SECRET_KEY')) 
 PAYSTACK_PUBLIC_KEY = str(os.getenv('PAYSTACK_PUBLIC_KEY')) 
 PAYSTACK_BASE_URL = 'https://api.paystack.co'
+
+# for allowed host to work
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:5500',
+    'http://localhost:5500'
+]
